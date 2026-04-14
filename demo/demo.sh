@@ -2,6 +2,7 @@
 
 echo " Vault on Kubernetes Demo"
 
+
 echo "Step 1: Show Vault Pods"
 kubectl get pods -n vault
 
