@@ -1,0 +1,14 @@
+{
+  "title": "Vault Dashboard",
+  "panels": [
+    {
+      "type": "graph",
+      "title": "Vault Requests",
+      "targets": [
+        {
+          "expr": "vault_core_handle_request_count"
+        }
+      ]
+    }
+  ]
+}
