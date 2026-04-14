@@ -1,30 +1,58 @@
-# Vault as a Service on Kubernetes (Production-Style Implementation)
+# 🔐 Vault as a Service on Kubernetes (Production-Style Implementation)
+
+A production-style implementation of HashiCorp Vault on Kubernetes, demonstrating secure, scalable, and automated secrets management using modern cloud-native practices.
+
+---
 
 ## 🚀 Key Highlights
-- HA Vault cluster using Raft storage  
-- Kubernetes-native deployment (Helm)  
-- Secure secrets delivery via Vault Agent Injector  
-- Authentication method: Kubernetes  
-- Secrets engines: KV, Transit, PKI  
-- Terraform-based infrastructure provisioning  
-- Observability-ready (Prometheus/Grafana)  
+
+- High Availability Vault cluster (Raft storage, 3 replicas)
+- Kubernetes-native deployment using Helm
+- Secure secrets injection via Vault Agent Injector
+- Kubernetes authentication (ServiceAccount-based)
+- Secrets engines: KV, Transit, PKI
+- Infrastructure provisioning with Terraform (EKS)
+- Observability with Prometheus & Grafana
+- GitOps-ready structure (ArgoCD compatible)
 
 ---
 
 ## 🧱 Architecture
-- EKS cluster provisioned using Terraform  
-- Vault HA cluster (3 pods with Raft storage)  
-- Application pods dynamically retrieving secrets from Vault  
-- Secure communication using TLS  
+
+![Architecture Diagram](architecture/diagram.png)
+
+### Components:
+- AWS EKS Cluster (Terraform)
+- Vault HA Cluster (3 pods, Raft storage)
+- Vault Agent Injector (sidecar)
+- Demo Application (NGINX)
+- Prometheus & Grafana (metrics/monitoring)
+
+### Flow:
+1. Terraform provisions EKS cluster  
+2. Helm deploys Vault in HA mode  
+3. Vault initialized and unsealed  
+4. Kubernetes authentication configured  
+5. Application pods authenticate via ServiceAccount  
+6. Vault injects secrets dynamically  
+7. Prometheus collects metrics  
 
 ---
 
-## 🧪 Demo Flow
-1. Deploy Kubernetes cluster (EKS via Terraform)  
-2. Install Vault using Helm  
-3. Initialize and unseal Vault  
-4. Enable secrets engines (KV, Transit, PKI)  
-5. Configure Kubernetes authentication  
-6. Deploy application → secrets injected automatically via Vault Agent  
+## 🔐 Security Features
+
+- TLS-secured communication  
+- Kubernetes-native authentication  
+- Policy-based access control  
+- Secrets never stored in application code  
+- Dynamic secret injection at runtime  
 
 ---
+
+## 🧪 Demo (End-to-End)
+
+### 1️⃣ Deploy Infrastructure
+```bash
+cd terraform
+terraform init
+terraform apply
