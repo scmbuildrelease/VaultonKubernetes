@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vault
+spec:
+  destination:
+    namespace: vault
+    server: https://kubernetes.default.svc
+
+  source:
+    repoURL: https://github.com/scmbuildrelease/VaultonKubernetes/
+    path: helm
+    targetRevision: main
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
