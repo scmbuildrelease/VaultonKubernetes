@@ -1,0 +1,18 @@
+server:
+  ha:
+    enabled: true
+    replicas: 3
+
+    raft:
+      enabled: true
+
+  extraEnvironmentVars:
+    VAULT_SEAL_TYPE: "awskms"
+    VAULT_AWSKMS_SEAL_KEY_ID: "alias/vault-unseal"
+    VAULT_AWSKMS_SEAL_REGION: "us-west-2"
+
+  dataStorage:
+    size: 20Gi
+
+  auditStorage:
+    enabled: true
